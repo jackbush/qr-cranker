@@ -2,18 +2,19 @@
 Easy, private and reliable QR codes.
 
 ## Ease
-1. Input any compatible data
-2. Render a QR code
-3. Customise appearance
-4. Export with one click
+- Input any compatible data
+- Render a testable preview
+- Customise appearance
+- Export with one click
 
 ## Privacy
-- no ads
-- no database
-- no data in url params
-- only basic analytics (# visits, device types)
+- No ads
+- No database
+- No data in URL params
+- Necessary analytics only
 
 ## Reliability
 - High durability
-- Defaults aligned to spec
+- Integrated safe area options
+- Appearance defaults aligned to spec
 - Alert if customisation breaks spec

@@ -88,4 +88,14 @@ describe('render()', () => {
     const size = count + 8
     expect(render(matrix)).toContain(`x="-4" y="-4" width="${size}" height="${size}"`)
   })
+
+  it('falls back to default fg when given an invalid hex', () => {
+    const svg = render(encode('hello'), { fg: 'not-a-colour' })
+    expect(svg).toContain('fill="#000000"')
+  })
+
+  it('falls back to default bg when given an invalid hex', () => {
+    const svg = render(encode('hello'), { bg: '"><script>' })
+    expect(svg).toContain('fill="#ffffff"')
+  })
 })

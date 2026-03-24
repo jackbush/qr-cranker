@@ -84,36 +84,36 @@ describe('downloadPng()', () => {
   afterEach(() => vi.unstubAllGlobals())
 
   it('triggers a download (anchor click)', async () => {
-    await downloadPng(sampleSvg, 1)
+    await downloadPng(sampleSvg, 512)
     expect(anchorClicked).toBe(true)
   })
 
   it('sets download filename to qr-code.png', async () => {
-    await downloadPng(sampleSvg, 1)
+    await downloadPng(sampleSvg, 512)
     expect(anchorDownloadAttr).toBe('qr-code.png')
   })
 
-  it('canvas size is baseSize × resolution', async () => {
-    await downloadPng(sampleSvg, 2, 512)
+  it('canvas size matches the requested pixel size', async () => {
+    await downloadPng(sampleSvg, 1024)
     expect(canvasWidth).toBe(1024)
     expect(canvasHeight).toBe(1024)
   })
 
-  it('4× resolution produces a larger canvas than 1×', async () => {
-    await downloadPng(sampleSvg, 1, 512)
-    const size1x = canvasWidth
-    await downloadPng(sampleSvg, 4, 512)
-    expect(canvasWidth).toBeGreaterThan(size1x)
+  it('2048px produces a larger canvas than 512px', async () => {
+    await downloadPng(sampleSvg, 512)
+    const small = canvasWidth
+    await downloadPng(sampleSvg, 2048)
+    expect(canvasWidth).toBeGreaterThan(small)
   })
 
   it('does NOT fill canvas background (preserves transparency)', async () => {
-    await downloadPng(sampleSvg, 1)
+    await downloadPng(sampleSvg, 512)
     const ctx = document.createElement('canvas').getContext()
     expect(ctx.fillRect).toBeUndefined()
   })
 
   it('revokes the SVG object URL after use', async () => {
-    await downloadPng(sampleSvg, 1)
+    await downloadPng(sampleSvg, 512)
     expect(URL.revokeObjectURL).toHaveBeenCalled()
   })
 })

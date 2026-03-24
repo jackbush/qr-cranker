@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+:root {
+    --ink: #1a1a1a;
+}
+
 /* ---- Base ---- */
 
 html,
@@ -14,9 +18,9 @@ body {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #fff;
-    color: #111;
+    color: var(--ink);
     display: flex;
     flex-direction: column;
     height: 100dvh;
@@ -33,7 +37,7 @@ main {
 }
 
 #left-column {
-    border-right: 2px solid #333;
+    border-right: 2px solid var(--ink);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -41,7 +45,7 @@ main {
 
 #left-column > hr {
     border: none;
-    border-top: 2px solid #333;
+    border-top: 2px solid var(--ink);
     flex-shrink: 0;
 }
 
@@ -86,30 +90,31 @@ h1 {
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 1rem;
+    /*margin-bottom: 1rem;*/
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid #333;
+    /*border-bottom: 2px solid var(--ink);*/
 }
 
 .step-heading h2 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
     font-weight: 700;
-    color: #111;
 }
 
 .step-heading button {
     flex-shrink: 0;
+    text-transform: uppercase;
     border: none;
     padding: 0;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #888;
+    opacity: 0.7;
     background: transparent;
     cursor: pointer;
 }
 
 .step-heading button:hover {
-    color: #111;
+    opacity: 1;
     background: transparent;
 }
 
@@ -131,9 +136,8 @@ h1 {
 
 label {
     display: block;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: #444;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 1;
 }
 
@@ -142,14 +146,14 @@ label {
 textarea {
     display: block;
     width: 100%;
-    padding: 0.75rem 0;
+    padding: 0;
     font: inherit;
     font-size: 1rem;
     border: none;
     border-radius: 0;
     resize: none;
     background: #fff;
-    color: #111;
+    color: var(--ink);
     line-height: 1.5;
     outline: none;
 }
@@ -168,14 +172,8 @@ textarea {
     justify-content: space-between;
     gap: 1rem;
     height: 3.25rem;
-    border-bottom: 1px solid #e0e0e0;
     flex-shrink: 0;
 }
-
-.control-row:last-child {
-    border-bottom: none;
-}
-
 
 .checkbox-label {
     display: flex;
@@ -188,15 +186,15 @@ select {
     padding: 0.4rem 0.5rem;
     font: inherit;
     font-size: 1rem;
-    border: 2px solid #333;
+    border: 2px solid var(--ink);
     border-radius: 0;
     background: #fff;
-    color: #111;
+    color: var(--ink);
     cursor: pointer;
 }
 
 select:focus {
-    outline: 2px solid #333;
+    outline: 2px solid var(--ink);
     outline-offset: 1px;
 }
 
@@ -205,14 +203,14 @@ input[type="checkbox"] {
     height: 24px;
     flex-shrink: 0;
     cursor: pointer;
-    accent-color: #333;
+    accent-color: var(--ink);
 }
 
 input[type="color"] {
     width: 2.25rem;
     height: 2rem;
     padding: 0.1rem;
-    border: 2px solid #333;
+    border: 2px solid var(--ink);
     border-radius: 0;
     cursor: pointer;
     background: #fff;
@@ -231,10 +229,10 @@ button {
     font: inherit;
     font-size: 1rem;
     font-weight: 600;
-    border: 2px solid #333;
+    border: 2px solid var(--ink);
     border-radius: 0;
     background: transparent;
-    color: #333;
+    color: var(--ink);
     cursor: pointer;
     transition:
         background 0.08s,
@@ -243,19 +241,13 @@ button {
 }
 
 button:hover:not(:disabled) {
-    background: #333;
+    background: var(--ink);
     color: #fff;
 }
 
 button:focus-visible {
-    outline: 2px solid #333;
+    outline: 2px solid var(--ink);
     outline-offset: 3px;
-}
-
-button:disabled {
-    border-color: #595959; /* 7:1 on white — WCAG AAA */
-    color: #595959;
-    cursor: not-allowed;
 }
 
 /* ---- Export ---- */
@@ -264,12 +256,18 @@ button:disabled {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 0 0 0;
 }
 
-.export-row:last-child {
-    border-bottom: none;
+.export-row button {
+    width: 100%;
+    background: var(--ink);
+    color: #fff;
+}
+
+.export-row button:hover:not(:disabled) {
+    background: #000;
+    border-color: #000;
 }
 
 .export-row label {
@@ -296,9 +294,25 @@ button:disabled {
     font-weight: 600;
     color: #78350f; /* 8.1:1 on #fef3c7 — WCAG AAA */
     background: #fef3c7;
-    border: 2px solid #333;
+    border: 2px solid var(--ink);
     width: min(44vw, 56vh);
     max-width: 480px;
+}
+
+/* ---- Desktop: expand input panel to fill remaining height ---- */
+
+@media (min-width: 861px) {
+    #input-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    #input-panel textarea {
+        flex: 1;
+        overflow-y: auto;
+    }
 }
 
 /* ---- Mobile ---- */
@@ -322,19 +336,19 @@ button:disabled {
     /* Reorder: title → input → preview → controls → export */
     #title-panel {
         order: 0;
-        border-bottom: 2px solid #333;
+        border-bottom: 2px solid var(--ink);
     }
     #input-panel {
         order: 1;
-        border-bottom: 2px solid #333;
+        border-bottom: 2px solid var(--ink);
     }
     #preview-panel {
         order: 2;
-        border-bottom: 2px solid #333;
+        border-bottom: 2px solid var(--ink);
     }
     #controls-panel {
         order: 3;
-        border-bottom: 2px solid #333;
+        border-bottom: 2px solid var(--ink);
     }
     #export-panel {
         order: 4;

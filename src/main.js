@@ -20,7 +20,7 @@ const resetBtn = document.getElementById('reset-btn')
 
 let currentSvg = ''
 
-const DEFAULTS = { fg: '#000000', bg: '#ffffff', transparent: false, ecLevel: 'M', quietZone: '4' }
+const DEFAULTS = { fg: '#000000', bg: '#ffffff', transparent: false, ecLevel: 'M', quietZone: '4', resolution: '1024' }
 
 function syncResetVisibility() {
   resetBtn.hidden = (
@@ -28,7 +28,8 @@ function syncResetVisibility() {
     bgColour.value === DEFAULTS.bg &&
     transparentBg.checked === DEFAULTS.transparent &&
     ecLevel.value === DEFAULTS.ecLevel &&
-    quietZone.value === DEFAULTS.quietZone
+    quietZone.value === DEFAULTS.quietZone &&
+    resolutionSelect.value === DEFAULTS.resolution
   )
 }
 
@@ -76,6 +77,7 @@ fgColour.addEventListener('input', update)
 bgColour.addEventListener('input', update)
 ecLevel.addEventListener('change', update)
 quietZone.addEventListener('change', update)
+resolutionSelect.addEventListener('change', syncResetVisibility)
 
 resetBtn.addEventListener('click', () => {
   fgColour.value = '#000000'
@@ -84,6 +86,7 @@ resetBtn.addEventListener('click', () => {
   bgColour.disabled = false
   ecLevel.value = 'M'
   quietZone.value = '4'
+  resolutionSelect.value = '1024'
   update()
 })
 

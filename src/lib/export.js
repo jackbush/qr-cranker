@@ -13,13 +13,11 @@ export async function copySvg(svgString) {
 /**
  * Download the QR code as a PNG.
  * @param {string} svgString
- * @param {number} resolution  pixel multiplier (e.g. 2 → 2× the SVG's natural size)
- * @param {number} baseSize    base pixel dimension (default 512)
+ * @param {number} size  output pixel dimension (e.g. 1024 → 1024×1024px)
  * @returns {Promise<void>}
  */
-export function downloadPng(svgString, resolution = 2, baseSize = 512) {
+export function downloadPng(svgString, size = 1024) {
   return new Promise((resolve, reject) => {
-    const size = baseSize * resolution
     const blob = new Blob([svgString], { type: 'image/svg+xml' })
     const url = URL.createObjectURL(blob)
     const img = new Image()

@@ -32,8 +32,3 @@ The app deploys automatically to GitHub Pages on push to `main` via `.github/wor
 **First-time setup:** go to Settings → Pages → Source and select **GitHub Actions**.
 
 The built app is served from `/qr-cranker/` (configured in `vite.config.js`).
-
-## To do 
-
-- resolution: change from 1x, 2x, 4x to pixel sizes (64px, 128px, 256px)
-- find a better colour selector

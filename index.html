@@ -1,96 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QR Cranker</title>
-</head>
-<body>
-  <main>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>QR Cranker</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <main>
+            <div id="left-column">
+                <div class="panel" id="title-panel">
+                    <h1>QR Cranker</h1>
+                    <p class="tagline">
+                        Privacy-first: nothing leaves your browser
+                    </p>
+                </div>
 
-    <div id="left-column">
+                <hr />
 
-      <div class="panel" id="title-panel">
-        <h1>QR Cranker</h1>
-        <p class="tagline">Private QR codes. Nothing leaves your browser.</p>
-      </div>
+                <section class="panel" id="input-panel">
+                    <div class="step-heading"><h2>Enter text</h2></div>
+                    <label for="text-input" class="visually-hidden"
+                        >Text or URL</label
+                    >
+                    <textarea
+                        id="text-input"
+                        placeholder="Paste a URL, type text…"
+                        rows="5"
+                        autocomplete="off"
+                        spellcheck="false"
+                    ></textarea>
+                </section>
 
-      <hr />
+                <hr />
 
-      <section class="panel" id="input-panel">
-        <h2 class="step-heading">Enter text to encode</h2>
-        <label for="text-input" class="visually-hidden">Text or URL</label>
-        <textarea id="text-input" placeholder="Paste a URL, type text…" rows="5" autocomplete="off" spellcheck="false"></textarea>
-      </section>
+                <section class="panel" id="controls-panel">
+                    <div class="step-heading">
+                        <h2>Customise appearance</h2>
+                        <button id="reset-btn" type="button" hidden>
+                            Reset
+                        </button>
+                    </div>
+                    <div class="control-row">
+                        <label for="fg-colour">Foreground colour</label>
+                        <input type="color" id="fg-colour" value="#000000" />
+                    </div>
+                    <div class="control-row">
+                        <label for="bg-colour">Background colour</label>
+                        <input type="color" id="bg-colour" value="#ffffff" />
+                    </div>
+                    <div class="control-row">
+                        <label class="checkbox-label" for="transparent-bg"
+                            >Transparent background</label
+                        >
+                        <input type="checkbox" id="transparent-bg" />
+                    </div>
+                    <div class="control-row">
+                        <label for="ec-level">Error correction level</label>
+                        <select id="ec-level">
+                            <option value="L">Low (7%)</option>
+                            <option value="M" selected>Medium (15%)</option>
+                            <option value="Q">Quartile (25%)</option>
+                            <option value="H">High (30%)</option>
+                        </select>
+                    </div>
+                    <div class="control-row">
+                        <label for="quiet-zone">Quiet zone</label>
+                        <select id="quiet-zone">
+                            <option value="0">None</option>
+                            <option value="2">Minimal (2)</option>
+                            <option value="4" selected>
+                                Standard (4) — ISO 18004
+                            </option>
+                            <option value="8">Wide (8)</option>
+                        </select>
+                    </div>
+                    <div class="control-row">
+                        <label for="resolution-select">PNG size</label>
+                        <select id="resolution-select">
+                            <option value="512">512px</option>
+                            <option value="1024" selected>1024px</option>
+                            <option value="2048">2048px</option>
+                        </select>
+                    </div>
+                </section>
 
-      <hr />
+                <hr />
 
-      <section class="panel" id="controls-panel">
-        <div class="step-heading">
-          <h2>Customise appearance</h2>
-          <button id="reset-btn" type="button" hidden>Reset</button>
-        </div>
-        <div class="control-row">
-          <label for="fg-colour">Foreground colour</label>
-          <input type="color" id="fg-colour" value="#000000" />
-        </div>
-        <div class="control-row">
-          <label for="bg-colour">Background colour</label>
-          <input type="color" id="bg-colour" value="#ffffff" />
-        </div>
-        <div class="control-row">
-          <label class="checkbox-label" for="transparent-bg">Transparent background</label>
-          <input type="checkbox" id="transparent-bg" />
-        </div>
-        <div class="control-row">
-          <label for="ec-level">Error correction level</label>
-          <select id="ec-level">
-            <option value="L">Low (7%)</option>
-            <option value="M" selected>Medium (15%)</option>
-            <option value="Q">Quartile (25%)</option>
-            <option value="H">High (30%)</option>
-          </select>
-        </div>
-        <div class="control-row">
-          <label for="quiet-zone">Quiet zone</label>
-          <select id="quiet-zone">
-            <option value="0">None</option>
-            <option value="2">Minimal (2)</option>
-            <option value="4" selected>Standard (4) — ISO 18004</option>
-            <option value="8">Wide (8)</option>
-          </select>
-        </div>
-      </section>
+                <section class="panel" id="export-panel">
+                    <div class="step-heading"><h2>Export</h2></div>
+                    <div class="export-row">
+                        <button id="download-png-btn" disabled>
+                            Download PNG
+                        </button>
+                    </div>
+                    <div class="export-row">
+                        <button id="copy-svg-btn" disabled>
+                            Copy SVG to clipboard
+                        </button>
+                        <span
+                            id="copy-svg-feedback"
+                            hidden
+                            aria-live="polite"
+                            aria-atomic="true"
+                        ></span>
+                    </div>
+                </section>
+            </div>
 
-      <hr />
-
-      <section class="panel" id="export-panel">
-        <h2 class="step-heading">Copy or download</h2>
-        <div class="export-row">
-          <button id="copy-svg-btn" disabled>Copy SVG</button>
-          <span id="copy-svg-feedback" hidden aria-live="polite" aria-atomic="true"></span>
-        </div>
-        <div class="export-row">
-          <button id="download-png-btn" disabled>Download PNG</button>
-          <label for="resolution-select">Resolution</label>
-          <select id="resolution-select">
-            <option value="1">1×</option>
-            <option value="2" selected>2×</option>
-            <option value="4">4×</option>
-          </select>
-        </div>
-      </section>
-
-    </div>
-
-    <div id="preview-panel">
-      <div id="qr-preview" aria-label="QR code preview"></div>
-      <div id="contrast-warning" hidden aria-live="polite" aria-atomic="true">
-        Low contrast — QR code may not scan reliably.
-      </div>
-    </div>
-
-  </main>
-  <script type="module" src="/src/main.js"></script>
-</body>
+            <div id="preview-panel">
+                <div id="qr-preview" aria-label="QR code preview"></div>
+                <div
+                    id="contrast-warning"
+                    hidden
+                    aria-live="polite"
+                    aria-atomic="true"
+                >
+                    Low contrast — QR code may not scan reliably.
+                </div>
+            </div>
+        </main>
+        <script type="module" src="/src/main.js"></script>
+    </body>
 </html>

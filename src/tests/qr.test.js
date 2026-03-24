@@ -64,4 +64,8 @@ describe('render()', () => {
   it('has shape-rendering="crispEdges" for sharp pixels', () => {
     expect(render(encode('hello'))).toContain('shape-rendering="crispEdges"')
   })
+
+  it('has aria-hidden="true" so screen readers skip rect enumeration', () => {
+    expect(render(encode('hello'))).toContain('aria-hidden="true"')
+  })
 })

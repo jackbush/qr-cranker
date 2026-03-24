@@ -75,14 +75,20 @@ h1 {
 
 .tagline {
   font-size: 0.85rem;
-  color: #777;
+  color: #595959; /* was #777 (~4.5:1); #595959 achieves 7:1 on white (WCAG AAA) */
   margin-top: 0.2rem;
 }
 
 /* ---- Controls ---- */
 
+label {
+  font-size: 0.875rem;
+  color: #444;
+}
+
 textarea {
   width: 100%;
+  margin-top: 0.35rem;
   padding: 0.75rem;
   font: inherit;
   font-size: 0.95rem;
@@ -93,7 +99,8 @@ textarea {
 }
 
 textarea:focus {
-  outline: none;
+  outline: 2px solid #555;
+  outline-offset: 1px;
   border-color: #555;
 }
 
@@ -112,16 +119,12 @@ textarea:focus {
 
 .control-row label:first-child {
   min-width: 120px;
-  font-size: 0.875rem;
-  color: #444;
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.875rem;
-  color: #444;
   cursor: pointer;
 }
 
@@ -135,7 +138,8 @@ select {
 }
 
 select:focus {
-  outline: none;
+  outline: 2px solid #555;
+  outline-offset: 1px;
   border-color: #555;
 }
 
@@ -165,7 +169,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background: #f5f5f5;
 }
 
@@ -174,10 +178,19 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .export-row {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.export-row label {
+  font-size: 0.875rem;
 }
 
 #copy-svg-feedback {
@@ -199,7 +212,7 @@ button:focus-visible {
   margin-top: 0.75rem;
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
-  color: #92400e;
+  color: #78350f; /* was #92400e (~6.4:1 on #fef3c7); #78350f achieves 8.1:1 (WCAG AAA) */
   background: #fef3c7;
   border: 1px solid #fcd34d;
   border-radius: 4px;

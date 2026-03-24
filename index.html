@@ -12,6 +12,7 @@
   </header>
   <main>
     <div id="input-panel">
+      <label for="text-input">Text or URL</label>
       <textarea id="text-input" placeholder="Enter text or URL..." rows="6" autocomplete="off" spellcheck="false"></textarea>
 
       <div id="controls">
@@ -40,19 +41,20 @@
     </div>
 
     <div id="preview-panel">
-      <div id="qr-preview"></div>
-      <div id="contrast-warning" hidden>
+      <div id="qr-preview" aria-label="QR code preview"></div>
+      <div id="contrast-warning" hidden aria-live="polite" aria-atomic="true">
         Low contrast — QR code may not scan reliably.
       </div>
     </div>
 
     <div id="export-panel">
       <div class="export-row">
-        <button id="copy-svg-btn">Copy SVG</button>
-        <span id="copy-svg-feedback" hidden></span>
+        <button id="copy-svg-btn" disabled>Copy SVG</button>
+        <span id="copy-svg-feedback" hidden aria-live="polite" aria-atomic="true"></span>
       </div>
       <div class="export-row">
-        <button id="download-png-btn">Download PNG</button>
+        <button id="download-png-btn" disabled>Download PNG</button>
+        <label for="resolution-select">Resolution</label>
         <select id="resolution-select">
           <option value="1">1×</option>
           <option value="2" selected>2×</option>

@@ -26,17 +26,24 @@ function getOptions() {
   }
 }
 
+function setExportEnabled(enabled) {
+  copySvgBtn.disabled = !enabled
+  downloadPngBtn.disabled = !enabled
+}
+
 function update() {
   const text = textInput.value.trim()
   if (!text) {
     qrPreview.innerHTML = ''
     currentSvg = ''
+    setExportEnabled(false)
     return
   }
   const options = getOptions()
   const matrix = encode(text, ecLevel.value)
   currentSvg = render(matrix, options)
   qrPreview.innerHTML = currentSvg
+  setExportEnabled(true)
 
   const { pass } = checkContrast(options.fg, options.bg, options.transparent)
   contrastWarning.hidden = pass

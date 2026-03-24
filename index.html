@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Cranker</title>
+</head>
+<body>
+  <header>
+    <h1>QR Cranker</h1>
+    <p class="tagline">Private QR codes. Nothing leaves your browser.</p>
+  </header>
+  <main>
+    <div id="input-panel">
+      <textarea id="text-input" placeholder="Enter text or URL..." rows="6"></textarea>
+
+      <div id="controls">
+        <div class="control-row">
+          <label for="fg-colour">Foreground</label>
+          <input type="color" id="fg-colour" value="#000000" />
+        </div>
+        <div class="control-row">
+          <label for="bg-colour">Background</label>
+          <input type="color" id="bg-colour" value="#ffffff" />
+          <label class="checkbox-label">
+            <input type="checkbox" id="transparent-bg" />
+            Transparent
+          </label>
+        </div>
+        <div class="control-row">
+          <label for="ec-level">Error correction</label>
+          <select id="ec-level">
+            <option value="L">Low (7%)</option>
+            <option value="M" selected>Medium (15%)</option>
+            <option value="Q">Quartile (25%)</option>
+            <option value="H">High (30%)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="preview-panel">
+      <div id="qr-preview"></div>
+      <div id="contrast-warning" hidden>
+        Low contrast — QR code may not scan reliably.
+      </div>
+    </div>
+
+    <div id="export-panel">
+      <div class="export-row">
+        <button id="copy-svg-btn">Copy SVG</button>
+        <span id="copy-svg-feedback" hidden></span>
+      </div>
+      <div class="export-row">
+        <button id="download-png-btn">Download PNG</button>
+        <select id="resolution-select">
+          <option value="1">1×</option>
+          <option value="2" selected>2×</option>
+          <option value="4">4×</option>
+        </select>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

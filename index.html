@@ -6,30 +6,30 @@
   <title>QR Cranker</title>
 </head>
 <body>
-  <header>
-    <h1>QR Cranker</h1>
-    <p class="tagline">Private QR codes. Nothing leaves your browser.</p>
-  </header>
   <main>
 
     <div id="left-column">
 
+      <div class="panel" id="title-panel">
+        <h1>QR Cranker</h1>
+        <p class="tagline">Private QR codes. Nothing leaves your browser.</p>
+      </div>
+
+      <hr />
+
       <section class="panel" id="input-panel">
-        <h2 class="step-heading">
-          <span class="step-num">01</span>
-          <span class="step-title">Enter text to encode</span>
-        </h2>
-        <label for="text-input">Text or URL</label>
+        <h2 class="step-heading">Enter text to encode</h2>
+        <label for="text-input" class="visually-hidden">Text or URL</label>
         <textarea id="text-input" placeholder="Paste a URL, type text…" rows="5" autocomplete="off" spellcheck="false"></textarea>
       </section>
 
       <hr />
 
       <section class="panel" id="controls-panel">
-        <h2 class="step-heading">
-          <span class="step-num">02</span>
-          <span class="step-title">Customise appearance</span>
-        </h2>
+        <div class="step-heading">
+          <h2>Customise appearance</h2>
+          <button id="reset-btn" type="button" hidden>Reset</button>
+        </div>
         <div class="control-row">
           <label for="fg-colour">Foreground colour</label>
           <input type="color" id="fg-colour" value="#000000" />
@@ -37,10 +37,10 @@
         <div class="control-row">
           <label for="bg-colour">Background colour</label>
           <input type="color" id="bg-colour" value="#ffffff" />
-          <label class="checkbox-label">
-            <input type="checkbox" id="transparent-bg" />
-            Transparent
-          </label>
+        </div>
+        <div class="control-row">
+          <label class="checkbox-label" for="transparent-bg">Transparent background</label>
+          <input type="checkbox" id="transparent-bg" />
         </div>
         <div class="control-row">
           <label for="ec-level">Error correction level</label>
@@ -51,15 +51,21 @@
             <option value="H">High (30%)</option>
           </select>
         </div>
+        <div class="control-row">
+          <label for="quiet-zone">Quiet zone</label>
+          <select id="quiet-zone">
+            <option value="0">None</option>
+            <option value="2">Minimal (2)</option>
+            <option value="4" selected>Standard (4) — ISO 18004</option>
+            <option value="8">Wide (8)</option>
+          </select>
+        </div>
       </section>
 
       <hr />
 
       <section class="panel" id="export-panel">
-        <h2 class="step-heading">
-          <span class="step-num">03</span>
-          <span class="step-title">Copy or download</span>
-        </h2>
+        <h2 class="step-heading">Copy or download</h2>
         <div class="export-row">
           <button id="copy-svg-btn" disabled>Copy SVG</button>
           <span id="copy-svg-feedback" hidden aria-live="polite" aria-atomic="true"></span>

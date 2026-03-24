@@ -15,14 +15,29 @@ const copySvgBtn = document.getElementById('copy-svg-btn')
 const copySvgFeedback = document.getElementById('copy-svg-feedback')
 const downloadPngBtn = document.getElementById('download-png-btn')
 const resolutionSelect = document.getElementById('resolution-select')
+const quietZone = document.getElementById('quiet-zone')
+const resetBtn = document.getElementById('reset-btn')
 
 let currentSvg = ''
+
+const DEFAULTS = { fg: '#000000', bg: '#ffffff', transparent: false, ecLevel: 'M', quietZone: '4' }
+
+function syncResetVisibility() {
+  resetBtn.hidden = (
+    fgColour.value === DEFAULTS.fg &&
+    bgColour.value === DEFAULTS.bg &&
+    transparentBg.checked === DEFAULTS.transparent &&
+    ecLevel.value === DEFAULTS.ecLevel &&
+    quietZone.value === DEFAULTS.quietZone
+  )
+}
 
 function getOptions() {
   return {
     fg: fgColour.value,
     bg: bgColour.value,
     transparent: transparentBg.checked,
+    margin: Number(quietZone.value),
   }
 }
 
@@ -37,6 +52,7 @@ function update() {
     qrPreview.innerHTML = ''
     currentSvg = ''
     setExportEnabled(false)
+    syncResetVisibility()
     return
   }
   const options = getOptions()
@@ -47,6 +63,7 @@ function update() {
 
   const { pass } = checkContrast(options.fg, options.bg, options.transparent)
   contrastWarning.hidden = pass
+  syncResetVisibility()
 }
 
 transparentBg.addEventListener('change', () => {
@@ -58,6 +75,17 @@ textInput.addEventListener('input', update)
 fgColour.addEventListener('input', update)
 bgColour.addEventListener('input', update)
 ecLevel.addEventListener('change', update)
+quietZone.addEventListener('change', update)
+
+resetBtn.addEventListener('click', () => {
+  fgColour.value = '#000000'
+  bgColour.value = '#ffffff'
+  transparentBg.checked = false
+  bgColour.disabled = false
+  ecLevel.value = 'M'
+  quietZone.value = '4'
+  update()
+})
 
 copySvgBtn.addEventListener('click', async () => {
   if (!currentSvg) return

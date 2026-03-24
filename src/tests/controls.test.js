@@ -88,11 +88,11 @@ describe('Customisation controls', () => {
   it('changing EC level produces a different (potentially larger) QR code', () => {
     ecLevel.value = 'L'
     ecLevel.dispatchEvent(new dom.window.Event('change'))
-    const sizeL = parseInt(qrPreview.innerHTML.match(/viewBox="0 0 (\d+)/)[1])
+    const sizeL = parseInt(qrPreview.innerHTML.match(/viewBox="-?\d+ -?\d+ (\d+)/)[1])
 
     ecLevel.value = 'H'
     ecLevel.dispatchEvent(new dom.window.Event('change'))
-    const sizeH = parseInt(qrPreview.innerHTML.match(/viewBox="0 0 (\d+)/)[1])
+    const sizeH = parseInt(qrPreview.innerHTML.match(/viewBox="-?\d+ -?\d+ (\d+)/)[1])
 
     expect(sizeH).toBeGreaterThanOrEqual(sizeL)
   })

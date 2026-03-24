@@ -68,4 +68,24 @@ describe('render()', () => {
   it('has aria-hidden="true" so screen readers skip rect enumeration', () => {
     expect(render(encode('hello'))).toContain('aria-hidden="true"')
   })
+
+  it('default margin=4 expands viewBox by 4 modules on each side', () => {
+    const matrix = encode('hello')
+    const count = matrix.length
+    const size = count + 8
+    expect(render(matrix)).toContain(`viewBox="-4 -4 ${size} ${size}"`)
+  })
+
+  it('margin=0 produces viewBox with no padding', () => {
+    const matrix = encode('hello')
+    const count = matrix.length
+    expect(render(matrix, { margin: 0 })).toContain(`viewBox="0 0 ${count} ${count}"`)
+  })
+
+  it('background rect covers the full area including margin', () => {
+    const matrix = encode('hello')
+    const count = matrix.length
+    const size = count + 8
+    expect(render(matrix)).toContain(`x="-4" y="-4" width="${size}" height="${size}"`)
+  })
 })

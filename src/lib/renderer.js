@@ -24,9 +24,14 @@ export function render(matrix, options = {}) {
   }
 
   for (let row = 0; row < count; row++) {
-    for (let col = 0; col < count; col++) {
+    let col = 0
+    while (col < count) {
       if (matrix[row][col]) {
-        rects.push(`<rect x="${col}" y="${row}" width="1" height="1" fill="${fg}"/>`)
+        const start = col
+        while (col < count && matrix[row][col]) col++
+        rects.push(`<rect x="${start}" y="${row}" width="${col - start}" height="1" fill="${fg}"/>`)
+      } else {
+        col++
       }
     }
   }

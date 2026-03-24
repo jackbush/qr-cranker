@@ -98,4 +98,29 @@ describe('render()', () => {
     const svg = render(encode('hello'), { bg: '"><script>' })
     expect(svg).toContain('fill="#ffffff"')
   })
+
+  it('merges adjacent dark modules into a single wider rect', () => {
+    // 5×5 square matrix; row 0 has run-of-3, gap, isolated module
+    const matrix = [
+      [true, true, true, false, true],
+      [false, false, false, false, false],
+      [false, false, false, false, false],
+      [false, false, false, false, false],
+      [false, false, false, false, false],
+    ]
+    const svg = render(matrix, { margin: 0, transparent: true })
+    expect(svg).toContain('x="0" y="0" width="3"')  // merged run of 3
+    expect(svg).toContain('x="4" y="0" width="1"')  // isolated module
+    // Only 2 fg rects total, not 4
+    const fgRects = svg.match(/fill="#000000"/g) ?? []
+    expect(fgRects).toHaveLength(2)
+  })
+
+  it('produces fewer rects than dark modules for a real QR code', () => {
+    const matrix = encode('hello')
+    const darkCount = matrix.flat().filter(Boolean).length
+    const svg = render(matrix, { margin: 0, transparent: true })
+    const rectCount = (svg.match(/<rect/g) ?? []).length
+    expect(rectCount).toBeLessThan(darkCount)
+  })
 })

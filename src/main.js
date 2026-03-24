@@ -93,13 +93,13 @@ quietZone.addEventListener('change', update)
 resolutionSelect.addEventListener('change', syncResetVisibility)
 
 resetBtn.addEventListener('click', () => {
-  setColourValue(fgColour, '#000000')
-  setColourValue(bgColour, '#ffffff')
-  transparentBg.checked = false
+  setColourValue(fgColour, DEFAULTS.fg)
+  setColourValue(bgColour, DEFAULTS.bg)
+  transparentBg.checked = DEFAULTS.transparent
   bgColour.disabled = false
-  ecLevel.value = 'M'
-  quietZone.value = '4'
-  resolutionSelect.value = '1024'
+  ecLevel.value = DEFAULTS.ecLevel
+  quietZone.value = DEFAULTS.quietZone
+  resolutionSelect.value = DEFAULTS.resolution
   update()
 })
 
@@ -107,6 +107,7 @@ copySvgBtn.addEventListener('click', async () => {
   if (copySvgBtn.getAttribute('aria-disabled') === 'true') return
   try {
     await copySvg(currentSvg)
+    copySvgFeedback.hidden = true
     copySvgBtn.textContent = 'Copied!'
     setTimeout(() => { copySvgBtn.textContent = 'Copy SVG to clipboard' }, 1000)
   } catch {

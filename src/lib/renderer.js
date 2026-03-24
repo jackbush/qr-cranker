@@ -1,3 +1,9 @@
+const HEX_RE = /^#(?:[0-9a-fA-F]{3}){1,2}$/
+
+function sanitiseHex(value, fallback) {
+  return HEX_RE.test(value) ? value : fallback
+}
+
 /**
  * Render a QR matrix as an SVG string.
  * @param {boolean[][]} matrix
@@ -5,7 +11,9 @@
  * @returns {string} SVG markup
  */
 export function render(matrix, options = {}) {
-  const { fg = '#000000', bg = '#ffffff', transparent = false, margin = 4 } = options
+  const { transparent = false, margin = 4 } = options
+  const fg = sanitiseHex(options.fg, '#000000')
+  const bg = sanitiseHex(options.bg, '#ffffff')
   const count = matrix.length
   const size = count + margin * 2
   // Each module is 1 unit; viewBox expands by margin on all sides

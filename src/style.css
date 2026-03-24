@@ -99,9 +99,7 @@ h1 {
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    /*margin-bottom: 1rem;*/
     padding-bottom: 0.75rem;
-    /*border-bottom: 2px solid var(--ink);*/
 }
 
 .step-heading h2 {

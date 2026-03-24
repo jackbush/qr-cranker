@@ -7,9 +7,10 @@ Easy, private, reliable QR codes — a static front-end app deployed on GitHub P
 - Live preview as you type
 - Customise foreground and background colours
 - Transparent background option
-- Error correction level (L / M / Q / H)
+- Error correction level (low, medium, quartile, high)
+- Quiet zone preference (none, minimal, standard, wide)
 - Contrast warning when colours may affect scannability
-- Export as SVG (copy to clipboard) or PNG (1×, 2×, 4×)
+- Export as SVG (copy to clipboard) or PNG (512p×, 1024p×, 2048p×)
 
 ## Privacy
 
@@ -30,9 +31,3 @@ npm test         # run all tests
 The app deploys automatically to GitHub Pages on push to `main` via `.github/workflows/deploy.yml`.
 
 The built app is served from `/qr-cranker/` (configured in `vite.config.js`).
-
-
-
-
-## to do
-- dark mode. only needs to affect left side component. use media queries to avoid flash on load.

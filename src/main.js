@@ -43,8 +43,9 @@ function getOptions() {
 }
 
 function setExportEnabled(enabled) {
-  copySvgBtn.disabled = !enabled
-  downloadPngBtn.disabled = !enabled
+  const v = enabled ? 'false' : 'true'
+  copySvgBtn.setAttribute('aria-disabled', v)
+  downloadPngBtn.setAttribute('aria-disabled', v)
 }
 
 function update() {
@@ -91,7 +92,7 @@ resetBtn.addEventListener('click', () => {
 })
 
 copySvgBtn.addEventListener('click', async () => {
-  if (!currentSvg) return
+  if (copySvgBtn.getAttribute('aria-disabled') === 'true') return
   try {
     await copySvg(currentSvg)
     copySvgFeedback.textContent = 'Copied!'
@@ -104,7 +105,7 @@ copySvgBtn.addEventListener('click', async () => {
 })
 
 downloadPngBtn.addEventListener('click', async () => {
-  if (!currentSvg) return
+  if (downloadPngBtn.getAttribute('aria-disabled') === 'true') return
   try {
     await downloadPng(currentSvg, Number(resolutionSelect.value))
   } catch {

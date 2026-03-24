@@ -8,6 +8,14 @@
 
 :root {
     --ink: #1a1a1a;
+    --focus: #ffb3c6;
+}
+
+/* ---- Focus ---- */
+
+:focus-visible {
+    outline: 4px solid var(--focus);
+    outline-offset: 4px;
 }
 
 /* ---- Base ---- */
@@ -193,10 +201,6 @@ select {
     cursor: pointer;
 }
 
-select:focus {
-    outline: 2px solid var(--ink);
-    outline-offset: 1px;
-}
 
 input[type="checkbox"] {
     width: 24px;
@@ -245,10 +249,6 @@ button:hover:not(:disabled) {
     color: #fff;
 }
 
-button:focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: 3px;
-}
 
 /* ---- Export ---- */
 
@@ -265,7 +265,13 @@ button:focus-visible {
     color: #fff;
 }
 
-.export-row button:hover:not(:disabled) {
+.export-row button[aria-disabled="true"] {
+    background: #595959;
+    border-color: #595959;
+    cursor: not-allowed;
+}
+
+.export-row button:hover:not([aria-disabled="true"]) {
     background: #000;
     border-color: #000;
 }

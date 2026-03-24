@@ -1,4 +1,6 @@
 import './style.css'
+import '@melloware/coloris/dist/coloris.css'
+import Coloris from '@melloware/coloris'
 import { encode } from './lib/qr.js'
 import { render } from './lib/renderer.js'
 import { checkContrast } from './lib/contrast.js'
@@ -18,7 +20,17 @@ const resolutionSelect = document.getElementById('resolution-select')
 const quietZone = document.getElementById('quiet-zone')
 const resetBtn = document.getElementById('reset-btn')
 
+Coloris.init()
+Coloris({ el: '[data-coloris]', format: 'hex', alpha: false })
+
 let currentSvg = ''
+
+// Update colour input value AND sync the Coloris swatch
+function setColourValue(input, hex) {
+  input.value = hex
+  const field = input.closest('.clr-field')
+  if (field) field.style.color = hex
+}
 
 const DEFAULTS = { fg: '#000000', bg: '#ffffff', transparent: false, ecLevel: 'M', quietZone: '4', resolution: '1024' }
 
@@ -81,8 +93,8 @@ quietZone.addEventListener('change', update)
 resolutionSelect.addEventListener('change', syncResetVisibility)
 
 resetBtn.addEventListener('click', () => {
-  fgColour.value = '#000000'
-  bgColour.value = '#ffffff'
+  setColourValue(fgColour, '#000000')
+  setColourValue(bgColour, '#ffffff')
   transparentBg.checked = false
   bgColour.disabled = false
   ecLevel.value = 'M'
@@ -95,9 +107,8 @@ copySvgBtn.addEventListener('click', async () => {
   if (copySvgBtn.getAttribute('aria-disabled') === 'true') return
   try {
     await copySvg(currentSvg)
-    copySvgFeedback.textContent = 'Copied!'
-    copySvgFeedback.hidden = false
-    setTimeout(() => { copySvgFeedback.hidden = true }, 2000)
+    copySvgBtn.textContent = 'Copied!'
+    setTimeout(() => { copySvgBtn.textContent = 'Copy SVG to clipboard' }, 1000)
   } catch {
     copySvgFeedback.textContent = 'Copy failed — clipboard unavailable'
     copySvgFeedback.hidden = false

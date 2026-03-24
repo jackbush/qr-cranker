@@ -48,11 +48,21 @@
                     </div>
                     <div class="control-row">
                         <label for="fg-colour">Foreground colour</label>
-                        <input type="color" id="fg-colour" value="#000000" />
+                        <input
+                            type="text"
+                            id="fg-colour"
+                            value="#000000"
+                            data-coloris
+                        />
                     </div>
                     <div class="control-row">
                         <label for="bg-colour">Background colour</label>
-                        <input type="color" id="bg-colour" value="#ffffff" />
+                        <input
+                            type="text"
+                            id="bg-colour"
+                            value="#ffffff"
+                            data-coloris
+                        />
                     </div>
                     <div class="control-row">
                         <label class="checkbox-label" for="transparent-bg"
@@ -121,7 +131,7 @@
                     aria-live="polite"
                     aria-atomic="true"
                 >
-                    Low contrast — QR code may not scan reliably.
+                    Low contrast warning: QR code may not scan reliably.
                 </div>
             </div>
         </main>

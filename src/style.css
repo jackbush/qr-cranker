@@ -69,6 +69,7 @@ main {
     gap: 1.25rem;
     padding: 2.5rem;
     overflow: hidden;
+    position: relative;
     background: #888;
 }
 
@@ -179,7 +180,7 @@ textarea {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    height: 3.25rem;
+    height: 3.5rem;
     flex-shrink: 0;
 }
 
@@ -199,31 +200,130 @@ select {
     background: #fff;
     color: var(--ink);
     cursor: pointer;
+    height: 40px;
 }
-
 
 input[type="checkbox"] {
-    width: 24px;
-    height: 24px;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
     cursor: pointer;
-    accent-color: var(--ink);
-}
-
-input[type="color"] {
-    width: 2.25rem;
-    height: 2rem;
-    padding: 0.1rem;
     border: 2px solid var(--ink);
     border-radius: 0;
-    cursor: pointer;
     background: #fff;
-    flex-shrink: 0;
+    position: relative;
+    display: grid;
+    place-content: center;
 }
 
-input[type="color"]:disabled {
+input[type="checkbox"]:checked {
+    background: var(--ink);
+}
+
+input[type="checkbox"]:checked::after {
+    content: "";
+    width: 10px;
+    height: 17px;
+    border: 2.5px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-3px);
+}
+
+/* ---- Colour picker (Coloris) ---- */
+
+/* Popup container */
+.clr-picker {
+    border-radius: 0 !important;
+    border: 2px solid var(--ink) !important;
+    /*box-shadow: none !important;*/
+    padding-bottom: 16px;
+}
+
+.clr-gradient {
+    border-radius: 0 !important;
+}
+
+/* Hide hex input, preview swatches, and Done button */
+.clr-picker input.clr-color,
+.clr-picker .clr-preview,
+.clr-picker .clr-close {
+    display: none !important;
+}
+
+/* Reset our base button styles for Coloris popup internals */
+.clr-picker button {
+    padding: 0;
+    font-size: 0.875rem;
+    font-weight: normal;
+    border: none;
+    background: none;
+    color: inherit;
+    white-space: normal;
+    transition: none;
+}
+
+.clr-picker button:hover {
+    background: none;
+    color: inherit;
+}
+
+/* Field wrapper — styled like a select */
+.clr-field {
+    display: flex;
+    border: 2px solid var(--ink);
+}
+
+.clr-field input {
+    flex: 1;
+    min-width: 125px;
+    width: 7rem;
+    padding: 0.4rem 0.5rem;
+    font: inherit;
+    font-size: 1rem;
+    border: none;
+    background: #fff;
+    color: var(--ink);
+    outline: none;
+    height: 40px;
+}
+
+/* Swatch button */
+.clr-field > button {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    border-left: 2px solid var(--ink) !important;
+    border-radius: 0;
+    background: currentColor;
+    cursor: pointer;
+    transition: none;
+}
+
+.clr-field > button:hover {
+    background: currentColor;
+    color: inherit;
+}
+
+/* Focus ring on the whole widget */
+.clr-field:focus-within {
+    outline: 4px solid var(--focus);
+    outline-offset: 4px;
+}
+
+.clr-field input:focus-visible,
+.clr-field > button:focus-visible {
+    outline: none;
+}
+
+/* Disabled state (transparent bg toggle) */
+.clr-field:has(input:disabled) {
     opacity: 0.35;
-    cursor: not-allowed;
+    pointer-events: none;
 }
 
 /* ---- Buttons ---- */
@@ -248,7 +348,6 @@ button:hover:not(:disabled) {
     background: var(--ink);
     color: #fff;
 }
-
 
 /* ---- Export ---- */
 
@@ -295,14 +394,16 @@ button:hover:not(:disabled) {
 }
 
 #contrast-warning {
-    padding: 0.6rem 0.875rem;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.6rem 1rem;
     font-size: 0.9375rem;
-    font-weight: 600;
-    color: #78350f; /* 8.1:1 on #fef3c7 — WCAG AAA */
-    background: #fef3c7;
-    border: 2px solid var(--ink);
-    width: min(44vw, 56vh);
-    max-width: 480px;
+    font-weight: 700;
+    color: #fff;
+    background: #c0390b; /* 5.1:1 on white text — WCAG AA */
+    white-space: nowrap;
 }
 
 /* ---- Desktop: expand input panel to fill remaining height ---- */
@@ -379,6 +480,9 @@ button:hover:not(:disabled) {
     }
 
     #contrast-warning {
+        position: static;
+        transform: none;
+        white-space: normal;
         width: 100%;
         max-width: 280px;
     }

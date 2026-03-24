@@ -29,6 +29,10 @@ npm test         # run all tests
 
 The app deploys automatically to GitHub Pages on push to `main` via `.github/workflows/deploy.yml`.
 
-**First-time setup:** go to Settings → Pages → Source and select **GitHub Actions**.
-
 The built app is served from `/qr-cranker/` (configured in `vite.config.js`).
+
+
+
+
+## to do
+- dark mode. only needs to affect left side component. use media queries to avoid flash on load.

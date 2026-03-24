@@ -39,7 +39,9 @@ export function downloadPng(svgString, resolution = 2, baseSize = 512) {
         const a = document.createElement('a')
         a.href = pngUrl
         a.download = 'qr-code.png'
+        document.body.appendChild(a)
         a.click()
+        document.body.removeChild(a)
         URL.revokeObjectURL(pngUrl)
         resolve()
       }, 'image/png')

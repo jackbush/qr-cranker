@@ -65,9 +65,13 @@ copySvgBtn.addEventListener('click', async () => {
   }
 })
 
-downloadPngBtn.addEventListener('click', () => {
+downloadPngBtn.addEventListener('click', async () => {
   if (!currentSvg) return
-  downloadPng(currentSvg, Number(resolutionSelect.value))
+  try {
+    await downloadPng(currentSvg, Number(resolutionSelect.value))
+  } catch {
+    alert('PNG export failed — try a different browser.')
+  }
 })
 
 update()

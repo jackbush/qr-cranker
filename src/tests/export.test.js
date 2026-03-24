@@ -70,6 +70,10 @@ describe('downloadPng()', () => {
         }
         return {}
       }),
+      body: {
+        appendChild: vi.fn(),
+        removeChild: vi.fn(),
+      },
     })
 
     vi.stubGlobal('Image', class {

@@ -1,7 +1,7 @@
 /**
  * Render a QR matrix as an SVG string.
  * @param {boolean[][]} matrix
- * @param {{ fg?: string, bg?: string, size?: number, transparent?: boolean }} options
+ * @param {{ fg?: string, bg?: string, transparent?: boolean }} options
  * @returns {string} SVG markup
  */
 export function render(matrix, options = {}) {

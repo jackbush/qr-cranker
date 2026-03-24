@@ -32,3 +32,20 @@ The app deploys automatically to GitHub Pages on push to `main` via `.github/wor
 **First-time setup:** go to Settings → Pages → Source and select **GitHub Actions**.
 
 The built app is served from `/qr-cranker/` (configured in `vite.config.js`).
+
+## To do branding
+
+- add a customisation parameter to control the ampunt of safe space
+- the tagline is too small, bump the size up while 
+- The tagline and labels are in a tiny all-caps style. it looks good but isn't legible enough, make it more legible while keeping the character of the design
+- The inputs in customise section are misaligned, give them all the same left-alignement so they line up nicely
+- 
+
+
+## To do features
+
+- resolution: change from 1x, 2x, 4x to pixel sizes (64px, 128px, 256px)
+- pair the download/copy buttons with the preview add an empty state with instructions to add some text on the left to get a preview
+- on colour input, allow full rbg space -- currently greyscale
+- on error correction, add some explainer on what this does and what's recommended
+- add a safe area slider with recommended default set to relevant ISO standard
